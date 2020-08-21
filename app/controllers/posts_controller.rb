@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
     def create
         post = Post.new(post_params)
-        if @post.save
+        if post.save
           render json: post
         else
           render json: {"error": "Your post wasn't created Lee, you made an uh oh!"}

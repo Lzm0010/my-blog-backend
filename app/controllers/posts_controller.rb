@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     
 
     def index
-        posts = Post.all #include sort here later
+        posts = Post.all.sort_by &:created_at
         render json: posts.to_json(:include => {
             :comments => {:only => [:id, :user_id, :author, :content, :created_at, :updated_at]}
         })

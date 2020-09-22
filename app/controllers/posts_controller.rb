@@ -19,12 +19,12 @@ class PostsController < ApplicationController
     end
 
     def show
-        render json: post
+        render json: @post
     end
 
     def update
-        if post.update(post_params)
-            render json: post.to_json(:include => {
+        if @post.update(post_params)
+            render json: @post.to_json(:include => {
                 :comments => {:only => [:id, :user_id, :author, :content, :created_at, :updated_at]}
             })
 
@@ -34,8 +34,8 @@ class PostsController < ApplicationController
     end
 
     def destroy
-        if post.destroy
-            render json: post
+        if @post.destroy
+            render json: @post
         else
             render json: {"error": "Your post wasn't deleted Lee, you made an uh oh!"}
         end
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     end
 
     def set_post
-        post = Post.find(params[:id])
+        @post = Post.find(params[:id])
     end
 
     
